@@ -1,5 +1,3 @@
-const qs = (sel) => document.querySelector(sel);
-
 function getKDFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("kd");
@@ -7,8 +5,6 @@ function getKDFromURL() {
 function getSelectedSource() {
   const kd = getKDFromURL();
   if (!kd) return null;
-
-  return CONFIG.sources.find((src) => src.kd === kd) || null;
 }
 
 let db;
@@ -24,11 +20,7 @@ async function loadDatabase() {
   db = new SQL.Database(new Uint8Array(buffer));
 }
 
-const SheetCache = {
-  dates: [],
-  lastSnapshot: [],
-  chartData: {},
-};
+const SheetCache = {};
 
 async function loadAllSheetsCache() {
   await loadDatabase();
@@ -322,7 +314,6 @@ const gridOptions = {
       getQuickFilterText: () => "",
 
       valueFormatter: (p) => Number(p.value || 0).toLocaleString("en-US"),
-      hide: false,
     },
   ],
   enableCellTextSelection: true,
@@ -334,7 +325,6 @@ const gridOptions = {
   },
   tooltipShowDelay: 300,
   pagination: false,
-  paginationPageSize: 50,
   animateRows: true,
   rowBuffer: 20,
   suppressRowTransform: true,
