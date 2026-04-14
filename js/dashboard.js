@@ -190,7 +190,6 @@ function buildRowDataFromSheet(rows) {
 const gridOptions = {
   theme: agGrid.themeQuartz,
   rowData: [],
-  rowNumbers: true,
   columnDefs: [
     {
       headerName: "ID",
