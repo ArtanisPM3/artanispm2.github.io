@@ -355,19 +355,13 @@ const CHART_STYLES = {
   light: {
     text: "#333",
     grid: "rgba(0,0,0,0.1)",
-    line: "#007bff",
-    point: "#007bff",
     pointBorder: "#ffffff",
-    canvas: "#ffffff",
     tooltipBg: "rgba(255,255,255,0.95)",
   },
   dark: {
     text: "#eee",
     grid: "rgba(255,255,255,0.2)",
-    line: "#ff9800",
-    point: "#ff9800",
     pointBorder: "#1e1e1e",
-    canvas: "#1e1e1e",
     tooltipBg: "rgba(40,40,40,0.95)",
   },
 };
