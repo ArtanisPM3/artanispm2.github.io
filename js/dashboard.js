@@ -1246,15 +1246,14 @@ function openGovModal(govId, govName) {
       const farms   = loadGovernorFarms(govId);
       const farmIds = farms.map((f) => f.id);
       const farmKvK = loadFarmKvKStats(farmIds);
-		const chartSection = renderCollapsibleSection(
-		  "Activity Chart",
-		  `
-		    <div class="modal-chart" style="height:400px;">
-		      <canvas id="modal-chart"></canvas>
-		    </div>
-		  `,
-		  true
-		);
+	  const chartSection = `
+	    <div class="modal-chart-section">
+	      <h3 class="modal-section-title">Activity Chart</h3>
+	      <div class="modal-chart" style="height:400px;">
+	        <canvas id="modal-chart"></canvas>
+	      </div>
+	    </div>
+	  `;
       body.innerHTML =
         '<div class="modal-controls">' +
         '  <button onclick="expandAllSections()">Expand All</button>' +
