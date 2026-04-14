@@ -1,9 +1,5 @@
 const qs = (sel) => document.querySelector(sel);
 
-function extractSheetId(url) {
-  const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
-  return match ? match[1] : null;
-}
 function getKDFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("kd");
@@ -14,26 +10,6 @@ function getSelectedSource() {
 
   return CONFIG.sources.find((src) => src.kd === kd) || null;
 }
-
-function normalizeSheetName(rangeStr) {
-  let name = rangeStr.split("!")[0];
-
-  if (name.startsWith("'") && name.endsWith("'")) {
-    name = name.slice(1, -1);
-  }
-
-  return name;
-}
-
-async function safeFetch(url) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
-  }
-  return res.json();
-}
-
-const CHART_RANGES = ["A:B", "D:D", "Q:Q", "E:G"];
 
 let db;
 
@@ -140,13 +116,6 @@ async function loadAllSheetsCache() {
   });
 }
 
-function formatNumber(val) {
-  if (val === undefined || val === null || val === "") return val;
-  if (isNaN(val)) return val;
-  return Number(val).toLocaleString("en-US", { minimumFractionDigits: 0 });
-}
-
-const num = (v) => Number(v) || 0;
 const COL_table = {
   ID: 0,
   NAME: 1,
