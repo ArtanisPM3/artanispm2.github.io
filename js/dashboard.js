@@ -395,12 +395,7 @@ function createChart(ctx, labels, datasets) {
       interaction: { mode: "index", intersect: false },
       plugins: {
         title: {
-          display: true,
-          text: "Select a governor to view chart",
-          font: {
-            size: 18,
-            weight: "600",
-          },
+          display: false,
         },
         legend: {},
       },
@@ -457,7 +452,6 @@ function applyChartTheme() {
   });
 
   inlineChart.options.plugins.legend.labels.color = styles.text;
-  inlineChart.options.plugins.title.color = styles.text;
   inlineChart.options.plugins.tooltip.backgroundColor = styles.tooltipBg;
   inlineChart.options.plugins.tooltip.titleColor = styles.text;
   inlineChart.options.plugins.tooltip.bodyColor = styles.text;
@@ -486,24 +480,15 @@ function updateChart(governorId) {
 	
 	const ctx = canvas.getContext("2d");
 
-  const row = SheetCache.lastSheetData.rows.find(
-    (r) => `${r[0]}` === `${governorId}`,
-  );
-
-  const titleText = row
-    ? `${row[1]} (ID: ${row[0]})`
-    : "Select a governor to view chart";
 
 	if (inlineChart) {
 	  inlineChart.destroy();
 	  inlineChart = null;
 	}
-	
 	createChart(ctx, labels, datasets);
 
   inlineChart.data.labels = labels;
   inlineChart.data.datasets = datasets;
-  inlineChart.options.plugins.title.text = titleText;
   inlineChart.update();
 }
 
@@ -1248,7 +1233,6 @@ function openGovModal(govId, govName) {
       const farmKvK = loadFarmKvKStats(farmIds);
 	  const chartSection = `
 	    <div class="modal-chart-section">
-	      <h3 class="modal-section-title">Activity Chart</h3>
 	      <div class="modal-chart" style="height:400px;">
 	        <canvas id="modal-chart"></canvas>
 	      </div>
