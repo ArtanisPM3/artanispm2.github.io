@@ -710,6 +710,8 @@ function expandAllSections() {
   document.querySelectorAll(".collapsible-icon").forEach((icon) => {
     icon.textContent = "−";
   });
+
+  if (inlineChart) inlineChart.resize();
 }
 
 function collapseAllSections() {
@@ -730,6 +732,10 @@ function toggleSection(id) {
   if (el.style.display === "none") {
     el.style.display = "block";
     icon.textContent = "−";
+    // If this section contains the chart canvas, resize after becoming visible
+    if (el.querySelector("#modal-chart") && inlineChart) {
+      inlineChart.resize();
+    }
   } else {
     el.style.display = "none";
     icon.textContent = "+";
@@ -1235,7 +1241,7 @@ function renderChartSection() {
     `<div class="modal-chart-wrapper" style="position:relative;height:340px;width:100%;padding:8px 0;">
        <canvas id="modal-chart"></canvas>
      </div>`,
-    false,
+    true,
   );
 }
 
